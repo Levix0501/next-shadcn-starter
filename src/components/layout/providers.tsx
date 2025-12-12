@@ -1,6 +1,8 @@
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
 
+import { QueryProvider } from './query-provider';
+
 export const Providers = ({
 	children
 }: Readonly<{
@@ -8,15 +10,17 @@ export const Providers = ({
 }>) => {
 	return (
 		<SessionProvider>
-			<ThemeProvider
-				disableTransitionOnChange
-				enableColorScheme
-				enableSystem
-				attribute="class"
-				defaultTheme="system"
-			>
-				{children}
-			</ThemeProvider>
+			<QueryProvider>
+				<ThemeProvider
+					disableTransitionOnChange
+					enableColorScheme
+					enableSystem
+					attribute="class"
+					defaultTheme="system"
+				>
+					{children}
+				</ThemeProvider>
+			</QueryProvider>
 		</SessionProvider>
 	);
 };
